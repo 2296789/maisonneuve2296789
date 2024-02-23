@@ -28,6 +28,23 @@ php artisan tinker
 \App\Models\Edutiant::factory()->times(100)->create()
 
 
+运行文件
+-------------------------------------------
+php artisan serve
+
+
+上传至webdev
+----------------------------------------
+添加文件 .htaccess
+更改文件 .env
+下载newProject文件夹，不要更改原文件，只将所有需要的文件加入至newProject中
+
+
+从GitHub上复制文件
+---------------------------------------
+git clone https://github.com/2296789/.....
+
+
 将当前版本上传至已有GitHub的一个分支
 ----------------------------------------
 git init
@@ -37,10 +54,9 @@ git remote add origin https://github.com/2296789/.....
 git chekout -b 分支名
 git push origin 分支名
 
-从GitHub上复制文件
----------------------------------------
-git clone https://github.com/2296789/.....
 
-
-
-
+将当前分支版本合并到main
+-----------------------------------------
+git checkout main
+git merge 分支名
+git push origin main

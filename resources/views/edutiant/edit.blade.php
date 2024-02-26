@@ -66,9 +66,11 @@
                                     <option value="{{ $ville->id }}">{{ $ville->nom }}</option>
                                 @endforeach
                             </select>
+                            @if($errors->has('ville_id'))
                             <div class="text-danger mt-2">
                                 {{ $errors->first('ville_id') }}
                             </div>
+                            @endif
                         </div>
                         <button type="submit" class="btn btn-primary">Mise À Jour</button>
                     </form>

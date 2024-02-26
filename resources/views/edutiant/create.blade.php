@@ -65,6 +65,9 @@
                                 <option value="{{ $ville->id }}">{{ $ville->nom }}</option>
                             @endforeach
                         </select>
+                        <div class="text-danger mt-2">
+                            {{ $errors->first('ville_id') }}
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </form>

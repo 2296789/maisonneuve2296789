@@ -46,8 +46,9 @@ class EdutiantController extends Controller
             'nom' => 'required|max:191',
             'email' => 'required|string',
             'adresse' => 'required|string',
-            'telephone' => 'nullable|string',
-            'date_naissance' => 'nullable|date'
+            'telephone' => 'required|string',
+            'date_naissance' => 'required|date',
+            'ville_id' => 'required'
         ]);
 
         $edutiant = Edutiant::create([
@@ -101,7 +102,8 @@ class EdutiantController extends Controller
             'email' => 'required|string',
             'adresse' => 'required|string',
             'telephone' => 'nullable|string',
-            'date_naissance' => 'nullable|date'
+            'date_naissance' => 'nullable|date',
+            'ville_id' => 'required'
         ]);
 
         $edutiant ->update([

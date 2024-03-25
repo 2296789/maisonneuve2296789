@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body class="d-flex flex-column h-100"> 
+@php $locale = session()->get('locale') @endphp
   <header>
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
       <div class="container-fluid">
@@ -14,49 +15,92 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">User</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Edutiant</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ route('edutiant.index') }}">Liste d'edutiant</a></li>
-                <li><a class="dropdown-item" href="{{ route('edutiant.create') }}">Ajouter l'edutiant</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">@lang('Home')</a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            @auth
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">@lang('Student')</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('edutiant.index') }}">@lang('Students List')</a></li>
+                <li><a class="dropdown-item" href="{{ route('edutiant.create') }}">@lang('New Student')</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">@lang('User')</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{route('user.index')}}">@lang('Users List')</a></li>
+                <li><a class="dropdown-item" href="{{route('user.create')}}">@lang('New User')</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">@lang('Category')</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('category.index') }}">@lang('Categories List')</a></li>
+                <li><a class="dropdown-item" href="{{ route('category.create') }}">@lang('New Category')</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">@lang('Article')</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('article.index') }}">@lang('Articles List')</a></li>
+                <li><a class="dropdown-item" href="{{ route('article.create') }}">@lang('New Article')</a></li>
+              </ul>
+            </li>
+          </ul>
+          @endauth
+
+          <ul class="navbar-nav mb-2 mb-sm-0">
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                      aria-expanded="false">@lang('Language') {{ $locale == '' ? '(en)' : "($locale)" }}</a>
+                  <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="{{ route('lang', 'en') }}">@lang('English')</a></li>
+                      <li><a class="dropdown-item" href="{{ route('lang', 'fr') }}">@lang('French')</a></li>
+                  </ul>
+              </li>
+              <li class="nav-item">
+                  @guest
+                      <a class="nav-link" href="{{route('login')}}">@lang('Login')</a>
+                  @else
+                      <a class="nav-link" href="{{route('logout')}}">@lang('Logout')</a>
+                  @endguest
+              </li>
+          </ul>
+          
         </div>
       </div>
     </nav>
   </header>
 
-  <div class="container my-5" >
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ session('success')}}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-    @yield('content')
+  @auth 
+    <p style="padding: 15px;">@lang('lang.text_welcome') : {{ Auth::user()->edutiant->nom }}!</p> 
+  @else
+    <p style="padding: 15px;"> @lang('lang.text_login_msg')</p>
+  @endauth
+
+  <div>
+      <div class="container my-5" >
+      @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('success')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
+      @yield('content')
+      </div>
   </div>
 
   <footer class="footer mt-auto py-2 bg-primary text-white">
     <div class="container text-center">
-        &copy; {{ date('Y')}} {{config('app.name') }}. All Rights Reserved
+        &copy; {{ date('Y')}} {{config('app.name') }}. @lang('All right Reserved')
     </div>
   </footer>
   

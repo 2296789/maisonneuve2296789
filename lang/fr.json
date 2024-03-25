@@ -1,0 +1,31 @@
+{
+    "Home":"Accueil",
+    "Login":"Connexion",
+    "Logout":"Déconnexion",
+
+    "User":"Utilisateur",
+    "Users List":"Liste d'Utilisateurs",
+    "New User":"Nouvel Utilisateur",
+
+    "Student":"Edutiant",
+    "Students List":"Liste d'Edutiants",
+    "New Student":"Nouvel Edutiant",
+    
+    "Article":"Article",
+    "Articles List":"Liste d'article",
+    "New Article":"Nouvel Article",
+
+    "Category":"Category",
+    "Categories List":"Liste de Categories",
+    "New Category":"Nouvel Category",
+
+    "Completed":"Terminé",
+    "Unfinished":"Inachevé",
+    "Search":"Rechercher",
+
+    "Language":"Langue",
+    "English":"Anglais",
+    "French":"Français",
+    
+    "All right Reserved":"Tous droits réservés"
+}

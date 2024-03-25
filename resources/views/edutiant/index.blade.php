@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Edutiant List')
+@section('title', 'Edutiants List')
 @section('content')
 
 <h1 class="my-5"> Edutiant List</h1>
@@ -28,5 +28,7 @@
         <div class="alert alert-danger">There are no edutiants to display!</div>
     @endforelse  
     </div>
+    
+    {{ $edutiants }}
 
 @endsection

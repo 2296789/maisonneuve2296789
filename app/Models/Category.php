@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Http\Resources\CategoryResource;
+
+class Category extends Model
+{
+    use HasFactory;
+    protected $fillable = ['category'];
+
+    public function articles() {
+        return $this->hasMany(Article::class);
+        // 一个article可以有多个category
+    }
+
+    protected function category(): Attribute {
+        return Attribute::make(
+            get: fn($value) => json_decode($value, true),
+            set: fn($value) => json_encode($value)
+        );
+    }
+
+    static public function categories(){
+        $categories = CategoryResource::collection(self::select()->orderby('category')->get());
+        $data =json_encode($categories);
+        return json_decode($data, true);
+    }
+}

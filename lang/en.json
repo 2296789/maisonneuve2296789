@@ -1,0 +1,32 @@
+
+{
+    "Home":"Home",
+    "Login":"Login",
+    "Logout":"Logout",
+
+    "User":"User",
+    "Users List":"Users List",
+    "New User":"New User",
+
+    "Article":"Article",
+    "Articles List":"Articles List",
+    "New Article":"New Article",
+
+    "Student":"Student",
+    "New Student":"New Student",
+    "Students List":"Students List",
+   
+    "Category":"Category",
+    "New Category":"New Category",
+    "Categories List":"Categories List",
+
+    "Completed":"Completed",
+    "Unfinished":"Unfinished",
+    "Search":"Search",
+
+    "Language":"Language",
+    "English":"English",
+    "French":"French",
+    
+    "All right Reserved":"All right Reserved"
+}

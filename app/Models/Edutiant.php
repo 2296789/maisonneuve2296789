@@ -20,4 +20,7 @@ class Edutiant extends Model
     public function ville(){
         return $this->belongsTo(Ville::class);
     }
+    public function user(){
+        return $this->hasOne(User::class);
+    }
 }

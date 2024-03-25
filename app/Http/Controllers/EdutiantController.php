@@ -15,12 +15,12 @@ class EdutiantController extends Controller
      */
     public function index()
     {
-        $edutiants = Edutiant::all();
-        // $edutiants = Edutiant::select()
-        // ->join('vills', 'villes.id', 'ville_id')
-        // ->get();
+        $edutiants = Edutiant::select()
+        ->join('villes', 'villes.id', 'ville_id')
+        ->orderBy('edutiants.id')
+        ->paginate(10);
 
-        return view('edutiant.index', ["edutiants" => $edutiants]);
+        return view('edutiant.index', compact("edutiants"));
     }
 
     /**
@@ -61,7 +61,8 @@ class EdutiantController extends Controller
         ]);
 
         return  redirect()->route('edutiant.show', $edutiant->id)
-        ->with('success', 'Edutiant created successfully!');
+                ->with('success', 'Edutiant created successfully!')
+                ->withInput($request->except('ville_id'));
     }
 
     /**
@@ -114,7 +115,9 @@ class EdutiantController extends Controller
             'ville_id' => $request->ville_id
         ]);
 
-        return  redirect()->route('edutiant.show', $edutiant->id)->with('success', 'Edutiant created successfully!');
+        return  redirect()->route('edutiant.show', $edutiant->id)
+                ->with('success', 'Edutiant created successfully!')
+                ->withInput($request->except('ville_id'));
     }
 
     /**

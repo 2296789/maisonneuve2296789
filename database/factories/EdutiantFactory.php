@@ -21,18 +21,15 @@ class EdutiantFactory extends Factory
     public function definition()
     {
         return [
-            // 'nom' => fake()->name(),
-            // 'adresse' => fake()->address(),
-            // 'telephone' => fake()->phoneNumber(),
-            // 'email' => fake()->email(),
-            // 'date_naissance' => fake()->date()
-
             'nom' => $this->faker->name(),
             'adresse' => $this->faker->address(),
             'telephone' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
             'date_naissance' => $this->faker->date(),
-            'ville_id' => Ville::factory()->create()->id
+            // 'ville_id' => Ville::factory()->create()->id
+            //学生的城市与已经存在的城市不一定有关
+            'ville_id' => Ville::all()->random()->id 
+            //所有学生的城市都是城市表格中存在的城市
         ];
     }
 }
